@@ -7,9 +7,12 @@ def is_unique(input):
     return True
 
 
-if __name__ == "__main__":
+def test_is_unique():
     input_1 = "bir"
     input_2 = "birb"
     assert is_unique(input_1) == True
     assert is_unique(input_2) == False
-    print('all done!')
+
+
+if __name__ == "__main__":
+    print("all done!")
