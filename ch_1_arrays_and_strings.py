@@ -15,4 +15,5 @@ def test_is_unique():
 
 
 if __name__ == "__main__":
+    test_is_unique()
     print("all done!")
