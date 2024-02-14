@@ -1,4 +1,16 @@
-def is_unique(input):
+def is_unique(input: str) -> bool:
+    """
+    Determine if all characters in a string are unique. 
+    Clarification: Is string UTF-8 encoded?
+    Strategy: Use Python Set 
+
+    Parameters:
+    input (str): String to test 
+
+    Returns:
+    bool: True if there are no repeat characters, False otherwise 
+
+    """
     chars = set()
     for char in input:
         if char in chars:
