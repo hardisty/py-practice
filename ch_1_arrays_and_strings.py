@@ -4,11 +4,11 @@ def is_unique(input: str) -> bool:
     Clarification: Is string UTF-8 encoded?
     Strategy: Use Python Set 
 
-    Parameters:
-    input (str): String to test 
+    Args:
+        input: String to test 
 
     Returns:
-    bool: True if there are no repeat characters, False otherwise 
+        True if there are no repeat characters, False otherwise 
 
     """
     chars = set()
