@@ -59,6 +59,27 @@ def test_is_permutation():
     assert is_permutation(input_1, input_3) == False
 
 
+def urlify(input: list) -> str:
+    """
+    Replace all spaces in a string with '%20'.
+    The string has sufficient space at the end to hold the additional characters,
+    and as input we receive the true length of the string
+
+    Observation: we should work from the end, in order to move characters only once.
+    Strings in Python (and Java) are immutible, so we should represent this as a list?
+    """
+    for i in range(len(input) - 1, 0, -1):
+        print(input[i])
+
+    return "how%20many%20spaces"
+
+
+def test_urlify():
+    input1 = list("how many spaces")
+    input1.append([None] * 2 * 3)
+    assert urlify(input1) == "how%20many%20spaces"
+
+
 if __name__ == "__main__":
     test_is_unique()
     test_is_permutation()
