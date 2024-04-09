@@ -40,5 +40,25 @@ def test_remove_dupes():
     assert len(str(head)) < first_len
 
 
+def remove_dupes_no_buffer(n: Node):
+    while n.next is not None:
+        if n.value == n.next.value:
+            n.next = n.next.next
+        elif n.value > n.next.value:
+            n.value, n.next.value = n.next.value, n.value  
+
+
+def test_remove_dupes_no_buffer():
+    head = Node(3)
+    head.append_to_tail(4)
+    head.append_to_tail(5)
+    head.append_to_tail(3)
+    first_len = len(str(head))
+    print(head)
+    remove_dupes_no_buffer(head)
+    print(head)
+
+
 if __name__ == "__main__":
     test_remove_dupes()
+    test_remove_dupes_no_buffer()
