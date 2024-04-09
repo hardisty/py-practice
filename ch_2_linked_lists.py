@@ -40,12 +40,15 @@ def test_remove_dupes():
     assert len(str(head)) < first_len
 
 
-def remove_dupes_no_buffer(n: Node):
+def remove_dupes_no_buffer(head: Node):
+    n = head 
     while n.next is not None:
         if n.value == n.next.value:
             n.next = n.next.next
         elif n.value > n.next.value:
-            n.value, n.next.value = n.next.value, n.value  
+            n.value, n.next.value = n.next.value, n.value
+            remove_dupes_no_buffer(head) 
+        n = n.next   
 
 
 def test_remove_dupes_no_buffer():
