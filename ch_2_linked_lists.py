@@ -60,8 +60,36 @@ def test_remove_dupes_no_buffer():
     print(head)
     remove_dupes_no_buffer(head)
     print(head)
+    assert len(str(head)) < first_len
+
+
+def find(head, k):
+    n = head
+    counter = 1
+    while n.next is not None:
+        counter += 1
+        n = n.next 
+    n = head
+    place = counter - k
+    counter = 0 
+
+    while place > counter:
+        n = n.next 
+        counter += 1
+    return n.value
+
+
+
+def test_find():
+    head = Node(3)
+    head.append_to_tail(4)
+    head.append_to_tail(5)
+    head.append_to_tail(3)
+    assert find(head, 2) == 5
+
 
 
 if __name__ == "__main__":
     test_remove_dupes()
     test_remove_dupes_no_buffer()
+    test_find()
