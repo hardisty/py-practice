@@ -86,10 +86,54 @@ def test_find():
     head.append_to_tail(5)
     head.append_to_tail(3)
     assert find(head, 2) == 5
+    assert find(head, 3) == 4
 
+
+def depth(node: Node, decent: int):
+    if node.next is None:
+        return 1
+    else:
+        decent += 1
+        return depth(node.next, decent) + 1
+
+
+def test_depth():
+    head = Node(3)
+    head.append_to_tail(4)
+    head.append_to_tail(5)
+    head.append_to_tail(3)
+    assert depth(head, 0) == 4
+
+
+def find_recursive(node: Node, k: int, decent: int): # -> (depth, kth)
+    if node.next is None:
+        return (1, node.value)
+    else:
+        decent += 1 
+        next_depth, next_val = find_recursive(node.next, k, decent)
+        curr_depth = next_depth + 1
+        total_depth = decent + curr_depth
+        print(f"{node}, k: {k}, decent: {decent}, curr_depth: {curr_depth}, next_depth: {next_depth}, next_val: {next_val}")
+        if (total_depth - decent) > k:
+            return curr_depth, node.next.value
+        
+
+def test_find_recursive():
+    head = Node(3)
+    head.append_to_tail(4)
+    head.append_to_tail(5)
+    head.append_to_tail(3)
+    answer = find_recursive(head, 1, 0)
+    print(answer)
+    assert answer[1] == 3
+    answer = find_recursive(head, 2, 0)
+    print(answer)
+    assert answer[1] == 5    
 
 
 if __name__ == "__main__":
     test_remove_dupes()
     test_remove_dupes_no_buffer()
     test_find()
+    test_depth()
+    # test_find_recursive() doesn't work
