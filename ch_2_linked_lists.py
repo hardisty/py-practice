@@ -128,7 +128,62 @@ def test_find_recursive():
     assert answer[1] == 3
     answer = find_recursive(head, 2, 0)
     print(answer)
-    assert answer[1] == 5    
+    assert answer[1] == 5
+
+def delete_middle_node(n: Node):
+    if n.next is None:
+        n = None
+    else:
+        while n.next is not None:
+            n.value = n.next.value
+            n.next = n.next.next 
+            n = n.next 
+                
+def test_delete_middle_node():
+    head = Node(3)
+    head.append_to_tail(4)
+    head.append_to_tail(5)
+    head.append_to_tail(3)
+    print(head)
+    delete_middle_node(head.next)
+    print(head)
+
+
+def partition(n: Node, partition: int):
+    # do we need to preserve object identities? assume no
+    # let's try to do this in one traversal 
+    first_new_head = None
+    first_new_tail = None
+    second_new_head = None
+    while n is not None:
+        if n.value < partition:
+            if first_new_head is None:
+                first_new_head = Node(n.value)
+                first_new_tail = first_new_head
+            else:
+                new_node = Node(n.value)
+                new_node.next = first_new_head
+                first_new_head = new_node
+        else:
+            if second_new_head is None:
+                second_new_head = Node(n.value)
+            else:
+                new_node = Node(n.value)
+                new_node.next = second_new_head
+                second_new_head = new_node 
+        n = n.next
+
+    first_new_tail.next = second_new_head
+    return first_new_head
+
+def test_partition():
+    head = Node(3)
+    head.append_to_tail(4)
+    head.append_to_tail(5)
+    head.append_to_tail(3)
+    partitioned = partition(head, 4)
+    print(partitioned)
+
 
 
 if __name__ == "__main__":
@@ -137,3 +192,5 @@ if __name__ == "__main__":
     test_find()
     test_depth()
     # test_find_recursive() doesn't work
+    test_delete_middle_node()
+    test_partition()
