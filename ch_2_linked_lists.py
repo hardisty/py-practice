@@ -9,7 +9,7 @@ class Node:
     def append_to_tail(self, value: int):
         end = Node(value)
         n = self
-        while (n.next is not None):
+        while n.next is not None:
             n = n.next
         n.next = end
 
