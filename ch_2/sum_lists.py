@@ -41,6 +41,27 @@ def sum_lists(first: Node, second: Node) -> Node:
             sum_node.append_to_tail(1)
     return sum_node
 
+
+def sum_lists_recursive(first: Node, second: Node) -> Node:
+    sum_val = first.value + second.value
+    carry = 0 
+    if sum_val >= 10:
+        carry = 1 
+        sum_val -= 10    
+    
+    sum_node = Node(sum_val)
+    
+    if first.next is not None and second.next is not None:
+        first.next.value += carry
+        sum_node.next = sum_lists_recursive(first.next, second.next)
+    elif first.next is not None and second.next is None:
+        sum_node.next = sum_lists_recursive(first.next, Node(carry))
+    elif first.next is None and second.next is not None:
+        sum_node.next = sum_lists_recursive(Node(carry), second.next)
+    elif first.next is None and second.next is None and carry:
+        sum_node.next = Node(1)
+    return sum_node
+
 if __name__ == "__main__":
 
 
@@ -54,6 +75,9 @@ if __name__ == "__main__":
     second.append_to_tail(6)
     
     sum_node = sum_lists(first, second)
+    print(sum_node)
+
+    sum_node = sum_lists_recursive(first, second)
     print(sum_node)
 
     print("All done!")

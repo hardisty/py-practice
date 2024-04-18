@@ -40,6 +40,20 @@ def test_function(input: int):
     print(re.search("...$", a).group(0)) 
 
 
+
+def sum_recursive(first: int, second: int) -> int:
+    print(f"first: {first}, second: {second}")
+    if first >= 1:
+        return 1 + sum_recursive(first - 1, second)
+    return second
+
+
+
+
 if __name__ == "__main__":
     input = 2
     test_function(input)
+    result = sum_recursive(20, 3)
+    print(result)
+
+    print("All done!")
